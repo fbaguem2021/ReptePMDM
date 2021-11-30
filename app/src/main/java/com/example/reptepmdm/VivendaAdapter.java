@@ -12,8 +12,7 @@ public class VivendaAdapter extends ArrayAdapter {
 
     private Vivenda[] vivendas;
 
-    private static class ViewHolder
-    {
+    private static class ViewHolder {
         ImageView imgVivenda;
         TextView lblType;
         TextView lblLoc;
@@ -27,14 +26,13 @@ public class VivendaAdapter extends ArrayAdapter {
         super(context, R.layout.vivenda_layout, vivendas);
         this.vivendas = vivendas;
     }
+
     @Override
-    public View getView(int position, View currentview, ViewGroup parent)
-    {
+    public View getView(int position, View currentview, ViewGroup parent) {
         View item = currentview;
         ViewHolder holder;
 
-        if (item == null)
-        {
+        if (item == null) {
             item = LayoutInflater.from(getContext()).
                     inflate(R.layout.vivenda_layout, parent, false);
 
@@ -48,13 +46,11 @@ public class VivendaAdapter extends ArrayAdapter {
             holder.lblRented = item.findViewById(R.id.lblRented);
 
             item.setTag(holder);
-        }
-        else
-        {
+        } else {
             holder = (ViewHolder) item.getTag();
         }
 
-        //holder.imgVivenda.setImageResource(vivendas[position].getImagen());
+        holder.imgVivenda.setImageResource(vivendas[position].getImagen());
         holder.lblType.setText(vivendas[position].getTipus());
         holder.lblLoc.setText(vivendas[position].getLocalitat());
         holder.lblDir.setText(vivendas[position].getDireccio());
