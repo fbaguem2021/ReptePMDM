@@ -5,25 +5,35 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/listVivendes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingVertical="25dp"
+        android:paddingStart="25dp"
+        android:paddingEnd="5dp"
+        android:layout_weight="2">
+        <ListView
+            android:id="@+id/listVivendes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5sp"
+            android:background="@drawable/border"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/border"
         android:padding="25dp"
-        android:gravity="center"
+        android:layout_marginStart="5sp"
         android:layout_weight="1">
         <TextView
             android:id="@+id/selectedLoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="hola"
             android:textSize="30sp"
             android:gravity="center"
             android:layout_marginVertical="20sp"/>
@@ -67,7 +77,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20sp"
+            android:background="@drawable/border">
             <TextView
                 android:id="@+id/selectedRented"
                 android:layout_width="match_parent"
