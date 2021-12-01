@@ -1,6 +1,8 @@
 package com.example.reptepmdm;
 
-public abstract class Vivenda {
+import java.io.Serializable;
+
+public abstract class Vivenda implements Serializable {
     private String tipus;
     private int imagen;
     private String localitat;
@@ -11,6 +13,7 @@ public abstract class Vivenda {
 
     public Vivenda(String tipus, int imagen, String localitat, String direccio, String alquiler, String habitacions, String status) {
         this.tipus = tipus;
+        this.imagen = imagen;
         this.localitat = localitat;
         this.direccio = direccio;
         this.alquiler = alquiler;
@@ -46,5 +49,18 @@ public abstract class Vivenda {
         return status;
     }
 
-    public abstract String getCaracterístiques();
+    @Override
+    public String toString() {
+        return "Vivenda{" +
+                "tipus='" + tipus + '\'' +
+                ", imagen=" + imagen +
+                ", localitat='" + localitat + '\'' +
+                ", direccio='" + direccio + '\'' +
+                ", alquiler='" + alquiler + '\'' +
+                ", habitacions='" + habitacions + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
+    public abstract String[] getCaracterístiques();
 }

@@ -15,7 +15,7 @@ public class Atic extends Vivenda {
     }
 
     @Override
-    public String getCaracterístiques() {
+    public String[] getCaracterístiques() {
         return null;
     }
 }
