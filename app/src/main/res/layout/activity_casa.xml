@@ -15,9 +15,9 @@
             android:id="@+id/selectedLoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:gravity="center"
-            android:layout_marginVertical="20sp"/>
+            android:layout_marginVertical="10sp"/>
         <ImageView
             android:id="@+id/selectedImg"
             android:layout_width="500dp"
@@ -32,28 +32,28 @@
                 android:id="@+id/casaRooms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/casaPati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/casaParking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/casaFasana"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:id="@+id/selectedRented"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="35sp"
                 android:gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,18 +78,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nom Llogater: "
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"/>
                 <EditText
-                    android:id="@+id/selectedLandlord"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"/>
+                    android:id="@+id/editLandlord"
+                    android:layout_width="match_parent"
+                    android:layout_height="70sp"
+                    android:textSize="25sp"
+                    android:maxLines="1"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginVertical="30sp">
+            android:layout_marginVertical="15sp">
             <Button
                 android:id="@+id/btnCancell"
                 android:layout_width="150dp"
@@ -98,8 +100,7 @@
             <Button
                 android:id="@+id/btnAccept"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Llogar"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -2,13 +2,20 @@ package com.example.reptepmdm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements Serializable {
+
+    private static final int ACTIVITY_PIS = 1;
+    private static final int ACTIVITY_CASA = 2;
+    private static final int ACTIVITY_ATIC = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,29 +31,35 @@ public class MainActivity extends AppCompatActivity {
         listVivendes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (comprovarPis(listVivendes, i)) {
+                Vivenda vivenda = vivendes[i];
+                if (comprovarPis(vivenda, i)) {
+                    Intent intent = new Intent(MainActivity.this, PisActivity.class);
+                    intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    startActivityForResult(intent, ACTIVITY_PIS);
 
-                } else if (comprovarCasa(listVivendes, i)) {
+                } else if (comprovarCasa(vivenda, i)) {
+                    Intent intent = new Intent(MainActivity.this, CasaActivity.class);
+                    intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    startActivityForResult(intent, ACTIVITY_CASA);
 
-                } else if (comprovarAtic(listVivendes, i)) {
-
+                } else if (comprovarAtic(vivenda, i)) {
+                    Intent intent = new Intent(MainActivity.this, AticActivity.class);
+                    intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    startActivityForResult(intent, ACTIVITY_ATIC);
                 }
             }
         });
     }
 
-    private boolean comprovarPis(ListView listVivendes, int i) {
-        Vivenda vivenda = (Vivenda) listVivendes.getSelectedItem();
+    private boolean comprovarPis(Vivenda vivenda, int i) {
         return vivenda.getTipus().equals("Pis");
     }
 
-    private boolean comprovarCasa(ListView listVivendes, int i) {
-        Vivenda vivenda = (Vivenda) listVivendes.getSelectedItem();
+    private boolean comprovarCasa(Vivenda vivenda, int i) {
         return vivenda.getTipus().equals("Casa");
     }
 
-    private boolean comprovarAtic(ListView listVivendes, int i) {
-        Vivenda vivenda = (Vivenda) listVivendes.getSelectedItem();
+    private boolean comprovarAtic(Vivenda vivenda, int i) {
         return vivenda.getTipus().equals("Atic");
     }
 
