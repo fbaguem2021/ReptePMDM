@@ -34,6 +34,7 @@ public class Atic extends Vivenda {
 
     @Override
     public String[] getCaracterístiques() {
+        // Total 6 valors
         String[] caracteristiques;
         ArrayList<String> llista = new ArrayList<>();
 
@@ -44,11 +45,14 @@ public class Atic extends Vivenda {
         } else {
             llista.add(this.getPis() + "rt, " + this.getPorta() + "ª, Amb ascensor");
         }
-        llista.add("Superficie del pati: " + this.getPati());
-
+        if (this.getPati().equals("No")) {
+            llista.add("Superficie del pati: " + "No te pati");
+        } else {
+            llista.add("Superficie del pati: " + this.getPati());
+        }
         if (this.getStatus().equals("No llogat")) {
             llista.add("Aquest pis no està llogat");
-            llista.add("_____________________");
+            llista.add("");
         } else {
             llista.add(("Aquest pis està llogat"));
             llista.add(this.getStatus());

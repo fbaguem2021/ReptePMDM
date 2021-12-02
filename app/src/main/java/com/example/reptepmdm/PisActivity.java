@@ -9,12 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
 public class PisActivity extends AppCompatActivity implements Serializable {
 
     final static String VIVENDA = "vivenda";
+    final static String POSICIO = "posicio";
+    static int posicio;
+    public boolean alquilat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class PisActivity extends AppCompatActivity implements Serializable {
 
         Intent intent = getIntent();
         Vivenda vivenda = (Vivenda) intent.getSerializableExtra(VIVENDA);
+        posicio = (int) intent.getIntExtra(POSICIO, -1);
 
         String[] característiques = vivenda.getCaracterístiques();
 
@@ -40,28 +45,50 @@ public class PisActivity extends AppCompatActivity implements Serializable {
         pisRooms.setText(característiques[1]);
         pisPlanta.setText(característiques[2]);
         selectedRented.setText(característiques[3]);
+        editLandlord.setText(característiques[4]);
 
         if (vivenda.getStatus().equals("No llogat")){
             btnAccept.setText("Llogar");
+            alquilat = false;
         } else {
-            editLandlord.setText(característiques[4]);
             btnAccept.setText("Alliverar");
+            editLandlord.setEnabled(false);
+            alquilat = true;
         }
-
-        // =========================================================================================
-
+        final Toast err = Toast.makeText(this, "Primer has d'escriure el nom del llogater", Toast.LENGTH_LONG);
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                boolean correcte;
+                if (alquilat){
+                    vivenda.setStatus("No llogat");
+                    correcte = true;
+                } else {
+                    if (editLandlord.getText().toString().equals("")){
+                        err.show();
+                        correcte = false;
+                    } else {
+                        vivenda.setStatus(editLandlord.getText().toString());
+                        correcte = true;
+                    }
+                }
+                if (correcte){
+                    Intent intent = new Intent(PisActivity.this, MainActivity.class);
+                    intent.putExtra(VIVENDA, vivenda);
+                    intent.putExtra(POSICIO, posicio);
+                    setResult(RESULT_OK, intent);
+                    finish();;
+                }
             }
         });
 
         btnCancell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(PisActivity.this, MainActivity.class);
+                setResult(RESULT_CANCELED, intent);
+                finish();
             }
         });
     }

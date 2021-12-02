@@ -28,16 +28,30 @@ public class Casa extends Vivenda {
 
     @Override
     public String[] getCaracterístiques() {
+        // Total 7 valors
         String[] caracteristiques;
         ArrayList<String> llista = new ArrayList<>();
 
         llista.add(this.getLocalitat());
         llista.add(this.getHabitacions());
-        llista.add("Superficie del pati: " + this.getPati());
-        llista.add("Superficie del parking: " + this.getParking());
+        if (this.getPati().equals("No")) {
+            llista.add("Superficie del pati: " + "No te pati");
+        } else {
+            llista.add("Superficie del pati: " + this.getPati());
+        }
+        if (this.getParking().equals("No")) {
+            llista.add("Superficie del pàrking: " + "No te pàrking");
+        } else {
+            llista.add("Superficie del parking: " + this.getParking());
+        }
+        if (this.getFasana().equals("No")) {
+            llista.add("Metres de façana: " + "No te façana");
+        } else {
+            llista.add("Metres de façana: " + this.getFasana());
+        }
         if (this.getStatus().equals("No llogat")) {
             llista.add("Aquest pis no està llogat");
-            llista.add("_____________________");
+            llista.add("");
         } else {
             llista.add(("Aquest pis està llogat"));
             llista.add(this.getStatus());

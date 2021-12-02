@@ -37,6 +37,7 @@ public class Pis extends Vivenda {
 
     @Override
     public String[] getCaracterístiques() {
+        // Total 5 valors
         String[] caracteristiques;
         ArrayList<String> llista = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class Pis extends Vivenda {
         }
         if (this.getStatus().equals("No llogat")) {
             llista.add("Aquest pis no està llogat");
-            llista.add("_____________________");
+            llista.add("");
         } else {
             llista.add(("Aquest pis està llogat"));
             llista.add(this.getStatus());

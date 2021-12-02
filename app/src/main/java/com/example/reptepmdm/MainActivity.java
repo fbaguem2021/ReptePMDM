@@ -16,13 +16,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private static final int ACTIVITY_PIS = 1;
     private static final int ACTIVITY_CASA = 2;
     private static final int ACTIVITY_ATIC = 3;
+    public final Vivenda[] vivendes = getivendes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final Vivenda[] vivendes = getivendes();
 
         ListView listVivendes = findViewById(R.id.listVivendes);
         VivendaAdapter adapter = new VivendaAdapter(this, vivendes);
@@ -35,20 +34,61 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 if (comprovarPis(vivenda, i)) {
                     Intent intent = new Intent(MainActivity.this, PisActivity.class);
                     intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    intent.putExtra(PisActivity.POSICIO, i);
                     startActivityForResult(intent, ACTIVITY_PIS);
 
                 } else if (comprovarCasa(vivenda, i)) {
                     Intent intent = new Intent(MainActivity.this, CasaActivity.class);
-                    intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    intent.putExtra(CasaActivity.VIVENDA, vivenda);
+                    intent.putExtra(CasaActivity.POSICIO, i);
                     startActivityForResult(intent, ACTIVITY_CASA);
 
                 } else if (comprovarAtic(vivenda, i)) {
                     Intent intent = new Intent(MainActivity.this, AticActivity.class);
-                    intent.putExtra(PisActivity.VIVENDA, vivenda);
+                    intent.putExtra(AticActivity.VIVENDA, vivenda);
+                    intent.putExtra(AticActivity.POSICIO, i);
                     startActivityForResult(intent, ACTIVITY_ATIC);
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Toast err = Toast.makeText(this, "No s'ha pogut alquilar/alliverar la vivenda correctament", Toast.LENGTH_LONG);
+        int posicio;
+        Vivenda vivenda;
+        if (resultCode == RESULT_OK) {
+
+            try {
+                switch (requestCode) {
+                    case ACTIVITY_PIS:
+                        posicio = data.getIntExtra(PisActivity.POSICIO, -1);
+                        vivenda = (Vivenda) data.getSerializableExtra(PisActivity.VIVENDA);
+                        vivendes[posicio] = vivenda;
+                        break;
+                    case ACTIVITY_CASA:
+                        posicio = data.getIntExtra(CasaActivity.POSICIO, -1);
+                        vivenda = (Vivenda) data.getSerializableExtra(CasaActivity.VIVENDA);
+                        vivendes[posicio] = vivenda;
+                        break;
+                    case ACTIVITY_ATIC:
+                        posicio = data.getIntExtra(AticActivity.POSICIO, -1);
+                        vivenda = (Vivenda) data.getSerializableExtra(AticActivity.VIVENDA);
+                        vivendes[posicio] = vivenda;
+                        break;
+                }
+            } catch (NullPointerException | IndexOutOfBoundsException ex) {
+                err.show();
+            }
+
+            ListView listVivendes = findViewById(R.id.listVivendes);
+            VivendaAdapter adapter = new VivendaAdapter(this, vivendes);
+            listVivendes.setAdapter(adapter);
+        }
+
     }
 
     private boolean comprovarPis(Vivenda vivenda, int i) {
@@ -60,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     private boolean comprovarAtic(Vivenda vivenda, int i) {
-        return vivenda.getTipus().equals("Atic");
+        return vivenda.getTipus().equals("Àtic");
     }
 
     private Vivenda[] getivendes() {
