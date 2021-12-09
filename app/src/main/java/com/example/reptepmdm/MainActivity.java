@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         if (resultCode == RESULT_OK) {
 
             try {
+
                 switch (requestCode) {
                     case ACTIVITY_PIS:
                         posicio = data.getIntExtra(PisActivity.POSICIO, -1);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         vivendes[posicio] = vivenda;
                         break;
                 }
+
             } catch (NullPointerException | IndexOutOfBoundsException ex) {
                 err.show();
             }

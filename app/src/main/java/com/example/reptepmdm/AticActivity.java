@@ -47,7 +47,7 @@ public class AticActivity extends AppCompatActivity {
         selectedRented.setText(característiques[4]);
         editLandlord.setText(característiques[5]);
 
-        if (vivenda.getStatus().equals("No llogat")){
+        if (vivenda.getStatus().equals("No llogat")) {
             btnAccept.setText("Llogar");
             alquilat = false;
         } else {
@@ -61,11 +61,11 @@ public class AticActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean correcte;
-                if (alquilat){
+                if (alquilat) {
                     vivenda.setStatus("No llogat");
                     correcte = true;
                 } else {
-                    if (editLandlord.getText().toString().equals("")){
+                    if (editLandlord.getText().toString().equals("")) {
                         err.show();
                         correcte = false;
                     } else {
@@ -73,12 +73,13 @@ public class AticActivity extends AppCompatActivity {
                         correcte = true;
                     }
                 }
-                if (correcte){
+                if (correcte) {
                     Intent intent = new Intent(AticActivity.this, MainActivity.class);
                     intent.putExtra(VIVENDA, vivenda);
                     intent.putExtra(POSICIO, posicio);
                     setResult(RESULT_OK, intent);
-                    finish();;
+                    finish();
+                    ;
                 }
             }
         });
